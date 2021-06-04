@@ -1,11 +1,13 @@
 from datetime import datetime
 import time
 import boto3
+from dateutil.tz import tzlocal # <-- pip install python-dateutil
+
 
 # Connect to a stream
 kinesis = boto3.client('kinesis')
-stream_name = '' # <-- Stream name goes here
-shard_id = "" # <--- Shard ID goes here
+stream_name = "blazingfast_mx" # <-- Stream name goes here
+shard_id = "shardId-000000000000" # <--- Shard ID goes here
 
 
 # Get current shard-iterator
@@ -25,6 +27,14 @@ for i in range (100):
     print(f"Last 5 chars of Current Shard Iterator: {shard_iter[-5:]}")
     print(f"Last 5 chars of New Shard Iterator: {next_shard_iterator[-5:]}")
     print(resp)
+    # If records exist, read data
+    if len(resp['Records']) >= 1:
+        for i in resp['Records']:
+            print(i['Data'].decode('ascii'))
+    
+    # Make NextShardIterator received from response the new one to use
     shard_iter = next_shard_iterator
     print(f"Last 5 chars of Shard Iter for next loop: {shard_iter[-5:]}")
+
+    # Wait a few seconds before running the loop again
     time.sleep(30)

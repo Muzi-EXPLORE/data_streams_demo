@@ -1,3 +1,6 @@
+"""
+This script assumes that the Data Stream has already been created.
+"""
 from datetime import datetime
 import time
 import calendar
@@ -6,7 +9,7 @@ import boto3
 
 # Connect to a stream
 kinesis = boto3.client('kinesis')
-stream_name = '' # <-- Stream name goes here
+stream_name = 'blazingfast_mx' # <-- Stream name goes here
 
 # Creaste data to write to stream
 for x in range(1000):

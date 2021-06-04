@@ -10,3 +10,6 @@ New data is sent every 15 seconds
 ## Read Data
 'read_data.py' runs a loop used to consume/read data from a stream.
 Runs a loop that fetches data every 30 seconds
+
+## Response Cleaner
+'response_cleaner.py' shows what a typical response would look like and how to clean or read data from it.
