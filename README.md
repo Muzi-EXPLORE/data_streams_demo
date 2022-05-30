@@ -15,41 +15,62 @@ Runs a loop that fetches data every 30 seconds
 
 
 ## Step 1 - SETUP
-### Create your python virtual environment by running the following commands.
+### Create your python virtual environment
 ```
 python -m venv env
 ```
 
 ### Activate your environment (Linux/Mac)
 ```
-python source/bin/activate
+source env/bin/activate
 ```
 
 ### Activate your environment (Windows)
 ```
-python env/Scripts/activate.bat
+env/Scripts/activate.bat
 ```
 
-### Install dependencies
+### Check if you virtual environment has been activated (Windows)
+```
+which python
+```
+If the output is `c:/users/python`, the environment hasn't been activated.  
+If it's along the lines `/c/Users/Admin/Documents/AWS/aws_vouchers/\Users\Admin\Documents\AWS\aws_vouchers\env/Scripts/python`,  it means it's been activated.  
+You're also going to see the name of the enviroment in your prompt `(env) Username@PCName ~/...`  
+
+### Check if you virtual environment has been activated (Linux/Mac)
+```
+which python3
+```
+If the output is `/usr/bin/python3`, the environment hasn't been activated.  
+If it's along the lines `usr/scripts/project_folder/env_name/bin/python` it means it's been activated.  
+You're also going to see the name of the enviroment in your prompt `(env) Username@PCName: ~/...`  
+
+### Install Dependencies
 ```
 pip install -r requirements.txt
 ```
 
+### Deactivate virtual environment (Run when done)
+```
+deactivate
+```
+
 ## Step 2 - Create Stream on Kinesis
 Use the AWS Management Console or the AWS CLI
-''''
+```
 aws kinesis create-stream \
     --stream-name blazingfast \
     --shard-count 1
-'''
+```
 
 ### Send data to stream
-Modify the stream name inside send_data.py
+Modify the stream name inside send_data.py  
 Run the script
 
 
 ### Read data from your stream
-Modify the stream name and shard id inside read_data.py
+Modify the stream name and shard id inside read_data.py  
 Run the script
 
 ### Cleaning responses from Kinesis
